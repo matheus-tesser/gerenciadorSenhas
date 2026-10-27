@@ -2,9 +2,9 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: 'main'
+    branches:
+      - main
 
-# Garante permissões para o token do GitHub Actions fazer o deploy
 permissions:
   contents: read
   pages: write
@@ -25,10 +25,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Set up Node
-        uses: actions/node@v4
-        with:
-          node-version: 20
-          cache: 'npm'
+        uses: actions/configure-pages@v4
 
       - name: Install dependencies
         run: npm ci
@@ -42,5 +39,5 @@ jobs:
           path: dist
 
       - name: Deploy to GitHub Pages
-          id: deployment
-          uses: actions/deploy-pages@v4
+        id: deployment
+        uses: actions/deploy-pages@v4
